@@ -168,15 +168,15 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	public int isPresent(T element) {
 		int posicion = -1;
 		boolean encontro = false;
-		
-		for (int i = 0; i < tamanoAct-1 && !encontro; i++) {
+
+		for (int i = 0; i < tamanoAct && !encontro; i++) {
 			T actual = elementos[i];
 			if (actual.compareTo(element)==0) {
 				encontro = true;
 				posicion = i+1;
 			}
 		}
-		
+
 		return posicion;
 	}
 
@@ -185,15 +185,18 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	public void exchange(int pos1, int pos2) {
 		T objeto1 = getElement(pos1);
 		T objeto2 = getElement(pos2);
-		
+
 		elementos[pos1-1] = objeto2;
 		elementos[pos2-1] = objeto1;
 	}
 
 	//Ojo con la posición, empieza desde 1
+	//TODO posible exception en caso de no estar dentro de la posición
 	public void changeInfo(int pos, T elem) {
 		elementos[pos-1] = elem;
 	}
+
+	//TODO lo que está bajo este comentario eventualmente toca eliminarlo
 
 	public T buscar(T dato) {
 		T buscado = null;
