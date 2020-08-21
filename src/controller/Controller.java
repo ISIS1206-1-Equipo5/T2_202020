@@ -92,6 +92,15 @@ public class Controller {
 					lector.close();
 					fin = true;
 					break;	
+				
+				case 7:
+					view.printMessage("--------- \nDar Integer (simple) a ingresar y posición separado por una ,: ");
+					String datos = lector.next();
+					String[] cadenas = datos.split(",");
+					modelo.insertarElemento(Integer.parseInt(cadenas[0]), Integer.parseInt(cadenas[1]));
+					view.printMessage("Dato agregado");
+					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					break;
 
 				default: 
 					view.printMessage("--------- \n Opcion Invalida !! \n---------");

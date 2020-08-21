@@ -19,20 +19,20 @@ public class TestArregloDinamico {
 
 	public void setUp2() {
 		for(int i =0; i< TAMANO*2; i++){
-			arreglo.agregar(i);
+			arreglo.addLast(i);
 		}
 	}
 
 	@Test
 	public void testArregloDinamico() {
 		assertTrue(arreglo!= null);
-		assertEquals(0, arreglo.darTamano());
+		assertEquals(0, arreglo.size());
 	}
 
 	@Test
 	public void testDarElemento() {
 		setUp2();
-		for(int i= 0; i <arreglo.darTamano(); i++)
+		for(int i= 0; i <arreglo.size(); i++)
 		{
 			assertEquals(Integer.valueOf(i), arreglo.darElemento(i));
 		}

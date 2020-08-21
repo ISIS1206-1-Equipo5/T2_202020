@@ -36,7 +36,7 @@ public class Modelo {
 	 */
 	public int darTamano()
 	{
-		return datos.darTamano();
+		return datos.size();
 	}
 	
 
@@ -46,7 +46,7 @@ public class Modelo {
 	 */
 	public void agregar(Integer dato)
 	{	
-		datos.agregar(dato);
+		datos.addFirst(dato); //TODO se cambió a add first
 	}
 	
 	/**
@@ -73,6 +73,13 @@ public class Modelo {
 	{
 		return datos.darElemento(i);
 	}
+
+	public void insertarElemento(Integer elem, int pos) {
+		datos.insertElement(elem, pos);
+		
+	}
+	
+	
 
 
 }
