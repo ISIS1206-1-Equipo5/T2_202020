@@ -31,7 +31,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 		tamanoMax = max;
 		tamanoAct = 0;
 	}
-	
+
 	public void addFirst(T element) {
 		tamanoAct++;
 		if ( tamanoAct == tamanoMax )
@@ -45,9 +45,9 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 			} 
 			System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
 		}
-		
+
 		T actual = element;
-		
+
 		for(int j=0; j < tamanoAct;j++)
 		{
 			T siguiente = elementos[j];
@@ -75,6 +75,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	}
 
 	//Ojo con las posiciones, que empiezan desde 1
+	//TODO posible exception en caso de no estar dentro de la posición
 	public void insertElement(T element, int pos) {
 		tamanoAct++;
 		if ( tamanoAct == tamanoMax )
@@ -88,9 +89,9 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 			} 
 			System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
 		}
-		
+
 		T actual = element;
-		
+
 		for(int j=pos-1; j < tamanoAct;j++)
 		{
 			T siguiente = elementos[j];
@@ -99,71 +100,103 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 		}
 		elementos[tamanoAct] = actual;
 	}
-	
-	@Override
+
+	//TODO Exception si no hay elementos en el arreglo.
 	public T removeFirst() {
-		// TODO Auto-generated method stub
-		return null;
+		T primero = elementos[0];
+
+		for (int i = 0; i < tamanoAct-1; i++) {
+			elementos[i] = elementos[i+1];
+		}
+		elementos[tamanoAct-1] = null;
+
+
+		tamanoAct--;
+		return primero;
 	}
 
-	
-	@Override
+
+	//TODO Exception si no hay elementos en el arreglo.
 	public T removeLast() {
-		// TODO Auto-generated method stub
-		return null;
+		T ultimo = elementos[tamanoAct-1];
+		elementos[tamanoAct-1] = null;
+		tamanoAct--;
+		return ultimo;
 	}
-	
-	@Override
+
+	//Ojo con las posiciones, que empiezan desde 1
+	//TODO posible exception en caso de no estar dentro de la posición
 	public T deleteElement(int pos) {
-		// TODO Auto-generated method stub
-		return null;
+		T aEliminar = elementos[pos-1];
+
+		for (int i = pos-1; i < tamanoAct-1; i++) {
+			elementos[i] = elementos[i+1];
+		}
+		elementos[tamanoAct-1] = null;
+
+		tamanoAct--;
+		return aEliminar;
 	}
 
-	@Override
+	//TODO Exception si no hay elementos en el arreglo.
 	public T firstElement() {
-		// TODO Auto-generated method stub
-		return null;
+		return elementos[0];
 	}
 
-	@Override
+	//TODO Exception si no hay elementos en el arreglo.
 	public T lastElement() {
-		// TODO Auto-generated method stub
-		return null;
+		return elementos[tamanoAct-1];
 	}
-	
-	@Override
+
+	//TODO posible exception en caso de no estar dentro de la posición
 	public T getElement(int pos) {
-		// TODO Auto-generated method stub
-		return null;
+		return elementos[pos-1];
 	}
-	
+
 	public int size() {
 		return tamanoAct;
 	}
 
-	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean empty = false;
+		if(tamanoAct==0)
+			empty= true;
+		return empty;
 	}
 
-	@Override
+	//Ojo con la posición, empieza desde 1
 	public int isPresent(T element) {
-		// TODO Auto-generated method stub
-		return 0;
+		int posicion = -1;
+		boolean encontro = false;
+
+		for (int i = 0; i < tamanoAct && !encontro; i++) {
+			T actual = elementos[i];
+			if (actual.compareTo(element)==0) {
+				encontro = true;
+				posicion = i+1;
+			}
+		}
+
+		return posicion;
 	}
 
-	@Override
+	//Ojo con la posición, empieza desde 1
+	//TODO posible exception en caso de no estar dentro de la posición
 	public void exchange(int pos1, int pos2) {
-		// TODO Auto-generated method stub
+		T objeto1 = getElement(pos1);
+		T objeto2 = getElement(pos2);
 
+		elementos[pos1-1] = objeto2;
+		elementos[pos2-1] = objeto1;
 	}
 
-	@Override
+	//Ojo con la posición, empieza desde 1
+	//TODO posible exception en caso de no estar dentro de la posición
 	public void changeInfo(int pos, T elem) {
-		// TODO Auto-generated method stub
-
+		elementos[pos-1] = elem;
 	}
+
+	//TODO lo que está bajo este comentario eventualmente toca eliminarlo
 
 	public T buscar(T dato) {
 		T buscado = null;
