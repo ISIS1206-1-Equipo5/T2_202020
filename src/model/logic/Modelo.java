@@ -66,7 +66,7 @@ public class Modelo {
 	 */
 	public Integer eliminar(Integer dato)
 	{
-		return datos.eliminar(dato);
+		return datos.removeLast(); //TODO se cambió a remove last
 	}
 	
 	public Integer darElemento(int i)
