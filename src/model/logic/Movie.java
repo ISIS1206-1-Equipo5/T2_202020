@@ -35,17 +35,17 @@ public class Movie implements Comparable<Movie>{
 	private String productionCountries;
 	
 	@CsvBindByPosition(position = 10)
-	private String spokenLanguages;
-	
-	@CsvBindByPosition(position = 11)
 	private String releaseDate;
 	
-	@CsvBindByPosition(position = 12)
+	@CsvBindByPosition(position = 11)
 	private int revenue;
-	
-	@CsvBindByPosition(position = 13)
+		
+	@CsvBindByPosition(position = 12)
 	private int runtime;
 	
+	@CsvBindByPosition(position = 13)
+	private String spokenLanguages;
+		
 	@CsvBindByPosition(position = 14)
 	private String status;
 	
@@ -73,7 +73,7 @@ public class Movie implements Comparable<Movie>{
 	private Casting casting;
 	
 	
-	public Movie(int pId, int pBudget, String pGenres, String pImbd_id, String pOriginalLanguage, String pOrigninalTitle, String pOverview, double pPopularity, String pProductionCompanies, String pProductionCountries, String pSpokenLanguages, String pReleaseDate, int pRevenue, int pRuntime,String pStatus, String pTagline, String pTitle, double pVoteAverage, int pVoteDiscount, int pPCompNumber, int pPCountNumber, int pSpokenLanNumber)
+	public Movie(int pId, int pBudget, String pGenres, String pImbd_id, String pOriginalLanguage, String pOrigninalTitle, String pOverview, double pPopularity, String pProductionCompanies, String pProductionCountries, String pReleaseDate, int pRevenue, String pSpokenLanguages, int pRuntime,String pStatus, String pTagline, String pTitle, double pVoteAverage, int pVoteDiscount, int pPCompNumber, int pPCountNumber, int pSpokenLanNumber)
 	{
 		id = pId;
 		budget = pBudget;
