@@ -12,6 +12,9 @@ import model.data_structures.IArregloDinamico;
 
 public class MovieCatalog {
 	
+	//CONSTANTES
+	
+	private static int POSSITIVE_AVERAGE = 6;
 	//ATRIBUTOS
 	
 	private IArregloDinamico<Movie> movies;
@@ -54,6 +57,21 @@ public class MovieCatalog {
 	public void addMovie(Movie movie)
 	{
 		movies.addLast(movie);
+	}
+	
+	
+	public ArregloDinamico<Movie> goodMoviesByDirectorName(String name){
+		ArregloDinamico<Movie> goodMovies = new ArregloDinamico<>(0);
+		
+		for(int i = 1; i< movies.size(); i++)
+		{
+			Movie m = movies.getElement(i);
+			
+			if(m.getVoteAverage()>= POSSITIVE_AVERAGE && m.getCasting().getDirectorName().equals(name))
+				goodMovies.addLast(m);
+		}
+		
+		return goodMovies;
 	}
 
 }
