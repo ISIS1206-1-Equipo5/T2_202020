@@ -1,6 +1,7 @@
 package view;
 
 import model.data_structures.ArregloDinamico;
+import model.logic.Actor;
 import model.logic.Modelo;
 import model.logic.Movie;
 
@@ -29,16 +30,26 @@ public class View
 
 
 	public void printMovieInfo(Movie pMovie) {
+		Actor[] actores = pMovie.getCasting().getActors();
+		String nombresActores = "";
+		for(Actor a : actores)
+		{
+			if(a!= null)
+				nombresActores += a.getName() + " | ";
+		}
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 		System.out.println("ID: " + pMovie.getId() + "\n" +
 						   "Título: " + pMovie.getTitle() + "\n" + 
-						   "Géneros: " + pMovie.getOriginalLanguge() + "\n" + //TODO arreglar esto
+						   "Géneros: " + pMovie.getGenres() + "\n" + //TODO arreglar esto
 						   "Fecha de estreno : "+ pMovie.getReleaseDate() + "\n" + 
-						   "Actores: " + pMovie.getCasting().getActorNumber()); //TODO arreglar esto
-		System.out.println("-----------------------------------------------------------------------------");
+						   "Actores: " + nombresActores); //TODO arreglar esto
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 
 	public void printMoviesInfo(ArregloDinamico<Movie> pMovies) {
+		
 		System.out.println("Películas encontradas: " + pMovies.size());
+		
 		for(int i = 1; i < pMovies.size(); i++)
 		{
 			printMovieInfo(pMovies.getElement(i));

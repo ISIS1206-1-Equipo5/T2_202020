@@ -45,7 +45,7 @@ public class Controller {
 				view.printMessage("Catálogo creado");
 				view.printMovieInfo(catalogo.getFirstMovie());
 				view.printMovieInfo(catalogo.getLastMovie());
-				view.printMessage("Se encontraron  " + catalogo.getMovieCount() + " películas " +"\n---------");						
+				view.printMessage("Se encontraron  " + catalogo.getMovieCount() + " películas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");						
 				break;
 
 			case 2:
@@ -53,10 +53,13 @@ public class Controller {
 				String mensaje = lector.next();
 				try {
 					view.printMoviesInfo(catalogo.goodMoviesByDirectorName(mensaje));
-				} catch (Exception e) {
+					break;
+				} 
+				catch (Exception e) {
 					System.out.println(e.getMessage());
+					break;
 				}						
-				break;
+				
 
 			case 3: 
 				view.printMessage("--------- \n Hasta pronto !! \n---------"); 

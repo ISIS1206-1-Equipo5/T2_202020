@@ -26,16 +26,51 @@ public class Casting {
 	
 	private Director director;
 	
-	public Casting(int pId, String pProducerName, int pProducerNumber, String pScreenPlayName, String pEditorName, int pActorNumber, int pDirectorNumber)
+	public Casting(String pId, String actor1Name, String actor1Gender, String actor2Name, String actor2Gender, String actor3Name, String actor3Gender, String actor4Name, String actor4Gender,String actor5Name, String actor5Gender,String pActorNumber, String directorName, String directorGender, String pDirectorNumber, String pProducerName, String pProducerNumber, String screenplayName, String editorName)
 	{
-		id = pId;
+		id = Integer.parseInt(pId);
 		producerName = pProducerName;
-		producerNumber = pProducerNumber;
-		directorNumber = pDirectorNumber;
-		actorNumber = pActorNumber;
-		directorNumber = pDirectorNumber;
-		actors = new Actor[5];
-		director = null;
+		producerNumber = Integer.parseInt(pProducerNumber);
+		directorNumber = Integer.parseInt(pDirectorNumber);
+		
+		actorNumber = Integer.parseInt(pActorNumber);
+		if(actorNumber >= 5)
+		{
+			actors = new Actor[5];
+			addActor(actor1Name, Integer.parseInt(actor1Gender), 0);
+			addActor(actor2Name, Integer.parseInt(actor2Gender), 1);
+			addActor(actor3Name, Integer.parseInt(actor3Gender), 2);
+			addActor(actor4Name, Integer.parseInt(actor4Gender), 3);
+			addActor(actor5Name, Integer.parseInt(actor5Gender), 4);
+		}
+		else {
+			actors = new Actor[5];
+			
+			if(!actor1Name.equals("none"))
+			{
+				addActor(actor1Name, Integer.parseInt(actor1Gender), 0);
+			}
+			
+			if(!actor2Name.equals("none")) {
+				addActor(actor2Name, Integer.parseInt(actor2Gender), 1);
+			}
+			
+			if(!actor3Name.equals("none")) {
+				addActor(actor3Name, Integer.parseInt(actor3Gender), 2);
+			}
+			
+			if(!actor4Name.equals("none")) {
+				addActor(actor4Name, Integer.parseInt(actor4Gender), 3);
+			}
+			if(!actor5Name.equals("none")) 
+			{
+				addActor(actor5Name, Integer.parseInt(actor5Gender), 4);
+			}
+		}
+		
+		directorNumber = Integer.parseInt(pDirectorNumber);
+		
+		director = new Director(directorName, Integer.parseInt(directorGender));
 		
 	}
 	
@@ -84,6 +119,10 @@ public class Casting {
 	public Director getDirector()
 	{
 		return director;
+	}
+	
+	public int getDirectorNumber() {
+		return directorNumber;
 	}
 
 }
