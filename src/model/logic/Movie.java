@@ -1,6 +1,6 @@
 package model.logic;
 
-public class Movie {
+public class Movie implements Comparable<Movie>{
 	
 	private int id;
 	
@@ -169,6 +169,12 @@ public class Movie {
 	public void setCasting(Casting pCasting)
 	{
 		casting = pCasting;
+	}
+
+	@Override
+	public int compareTo(Movie o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

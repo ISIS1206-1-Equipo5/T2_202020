@@ -67,7 +67,7 @@ public class MovieCatalog {
 		{
 			Movie m = movies.getElement(i);
 			
-			if(m.getVoteAverage()>= POSSITIVE_AVERAGE && m.getCasting().getDirectorName().equals(name))
+			if(m.getVoteAverage()>= POSSITIVE_AVERAGE && m.getCasting().getDirector().getName().equals(name))
 				goodMovies.addLast(m);
 		}
 		
