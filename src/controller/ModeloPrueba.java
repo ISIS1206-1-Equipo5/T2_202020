@@ -1,29 +1,37 @@
-package model.logic;
+package controller;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Reader;
 import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
-
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
+import model.logic.Casting;
+import model.logic.Movie;
 
-public class MovieCatalog {
-	
-	private IArregloDinamico<Movie> movies;
-	
-	public MovieCatalog() {
-		movies = new ArregloDinamico<Movie>(0);
+public class ModeloPrueba {
+
+	private IArregloDinamico<Movie> datos;
+
+	/**
+	 * Constructor del modelo del mundo con capacidad predefinida
+	 */
+	public ModeloPrueba()
+	{
+		datos = new ArregloDinamico<Movie>(7);
 	}
-	
-	public MovieCatalog(int capacidad) {
-		movies = new ArregloDinamico<Movie>(capacidad);
+
+	/**
+	 * Constructor del modelo del mundo con capacidad dada
+	 * @param tamano
+	 */
+	public ModeloPrueba(int capacidad)
+	{
+		datos = new ArregloDinamico<Movie>(capacidad);
 	}
-	
+
 	public void readData(String path1, String path2)
 	{
 		try {
@@ -36,11 +44,11 @@ public class MovieCatalog {
 			{
 				Movie m = infoPeliculas.get(i);
 				m.setCasting(infoCasting.get(i));
-				movies.addLast(m);
+				datos.addLast(m);
 			}
 			
-			System.out.println(movies.darElemento(2).getId());
-			System.out.println(movies.darElemento(2).getCasting().getId());
+			System.out.println(datos.darElemento(2).getId());
+			System.out.println(datos.darElemento(2).getCasting().getId());
 			
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -49,4 +57,8 @@ public class MovieCatalog {
 		}
 	}
 
+	public int darTamano() {
+		return datos.size();
+	}
+	
 }
