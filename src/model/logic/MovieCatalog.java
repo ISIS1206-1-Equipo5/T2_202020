@@ -60,7 +60,7 @@ public class MovieCatalog {
 	}
 	
 	
-	public ArregloDinamico<Movie> goodMoviesByDirectorName(String name){
+	public ArregloDinamico<Movie> goodMoviesByDirectorName(String name) throws Exception{
 		ArregloDinamico<Movie> goodMovies = new ArregloDinamico<>(0);
 		
 		for(int i = 1; i< movies.size(); i++)
@@ -71,7 +71,25 @@ public class MovieCatalog {
 				goodMovies.addLast(m);
 		}
 		
+		if( goodMovies.isEmpty())
+		{
+			throw new Exception("No se encontró el director o el driector no tiene buenas películas");
+		}
+		
 		return goodMovies;
 	}
+
+	public int getMovieCount() {
+		return movies.size();
+	}
+
+	public Movie getFirstMovie() {
+		return movies.firstElement();
+	}
+
+	public Movie getLastMovie() {
+		return movies.lastElement();
+	}
+
 
 }

@@ -2,16 +2,22 @@ package controller;
 
 import java.util.Scanner;
 
+import model.data_structures.ArregloDinamico;
 import model.logic.Modelo;
+import model.logic.MovieCatalog;
 import view.View;
 
 public class Controller {
 
-	/* Instancia del Modelo*/
-	private Modelo modelo;
+	/* Instancia del catalogo*/
+	private MovieCatalog catalogo;
 
 	/* Instancia de la Vista*/
 	private View view;
+
+	private static final String PATH_CASTING_PELICULAS = "./data/MoviesCastingRaw-small.csv";
+
+	private static final String PATH_INFO_PELICULAS = "./data/SmallMoviesDetailsCleaned.csv";
 
 	/**
 	 * Crear la vista y el modelo del proyecto
@@ -20,15 +26,13 @@ public class Controller {
 	public Controller ()
 	{
 		view = new View();
-		modelo = new Modelo();
+		catalogo = new MovieCatalog();
 	}
 
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		Integer dato = 0;
-		Integer respuesta = 0;
 
 		while( !fin ){
 			view.printMenu();
@@ -36,69 +40,29 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 			case 1:
-				view.printMessage("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-				int capacidad = lector.nextInt();
-				modelo = new Modelo(capacidad); 
-				view.printMessage("Arreglo Dinamico creado");
-				view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+				view.printMessage("--------- \nSe están cargando los datos ");
+				catalogo.readData(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS);
+				view.printMessage("Catálogo creado");
+				view.printMovieInfo(catalogo.getFirstMovie());
+				view.printMovieInfo(catalogo.getLastMovie());
+				view.printMessage("Se encontraron  " + catalogo.getMovieCount() + " películas " +"\n---------");						
 				break;
 
 			case 2:
-				view.printMessage("--------- \nDar Integer (simple) a ingresar: ");
-				dato = lector.nextInt();
-				modelo.agregar(dato);
-				view.printMessage("Dato agregado");
-				view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+				view.printMessage("--------- \nDar el nombre del director a buscar:");
+				String mensaje = lector.next();
+				try {
+					view.printMoviesInfo(catalogo.goodMoviesByDirectorName(mensaje));
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}						
 				break;
 
-			case 3:
-				view.printMessage("--------- \nDar Integer (simple) a buscar: ");
-				dato = lector.nextInt();
-				respuesta = modelo.buscar(dato);
-				if ( respuesta != null)
-				{
-					view.printMessage("Dato encontrado: "+ respuesta);
-				}
-				else
-				{
-					view.printMessage("Dato NO encontrado");
-				}
-				view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-				break;
-
-			case 4:
-				view.printMessage("--------- \nDar Integer (simple) a eliminar: ");
-				dato = lector.nextInt();
-				respuesta = modelo.eliminar(dato);
-				if ( respuesta != null)
-				{
-					view.printMessage("Dato eliminado "+ respuesta);
-				}
-				else
-				{
-					view.printMessage("Dato NO eliminado");							
-				}
-				view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-				break;
-
-			case 5: 
-				view.printMessage("--------- \nContenido del Arreglo: ");
-				view.printModelo(modelo);
-				view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-				break;	
-
-			case 6: 
+			case 3: 
 				view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;
 				break;	
-
-			case 7:
-				view.printMessage("Se va a cambiar un dato. Inserte las posicion y el nuevo valor separado por una ,:");
-				String[] cadena = lector.next().split(",");
-				modelo.cambiarInfo(Integer.parseInt(cadena[0]), Integer.parseInt(cadena[1]));
-				view.printMessage("Se actualizaron los datos");
-				break;
 
 			default: 
 				view.printMessage("--------- \n Opcion Invalida !! \n---------");
