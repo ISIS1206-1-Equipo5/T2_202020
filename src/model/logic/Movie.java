@@ -35,40 +35,45 @@ public class Movie implements Comparable<Movie>{
 	private String productionCountries;
 	
 	@CsvBindByPosition(position = 10)
-	private String releaseDate;
+	private String spokenLanguages;
 	
 	@CsvBindByPosition(position = 11)
-	private int revenue;
+	private String releaseDate;
 	
 	@CsvBindByPosition(position = 12)
-	private String status;
+	private int revenue;
 	
 	@CsvBindByPosition(position = 13)
-	private String tagline;
+	private int runtime;
 	
 	@CsvBindByPosition(position = 14)
-	private String title;
+	private String status;
 	
 	@CsvBindByPosition(position = 15)
-	private double voteAverage;
+	private String tagline;
 	
 	@CsvBindByPosition(position = 16)
-	private int voteCount;
+	private String title;
 	
 	@CsvBindByPosition(position = 17)
-	private int productionCompaniesNumber;
+	private double voteAverage;
 	
 	@CsvBindByPosition(position = 18)
-	private int productionCountriesNumber;
+	private int voteCount;
 	
 	@CsvBindByPosition(position = 19)
-	private int spokenLanguagesNumber;
+	private int productionCompaniesNumber;
 	
 	@CsvBindByPosition(position = 20)
+	private int productionCountriesNumber;
+	
+	@CsvBindByPosition(position = 21)
+	private int spokenLanguagesNumber;
+	
 	private Casting casting;
 	
 	
-	public Movie(int pId, int pBudget, String pGenres, String pImbd_id, String pOriginalLanguage, String pOrigninalTitle, String pOverview, double pPopularity, String pProductionCompanies, String pProductionCountries, String pReleaseDate, int pRevenue, String pStatus, String pTagline, String pTitle, double pVoteAverage, int pVoteDiscount, int pPCompNumber, int pPCountNumber, int pSpokenLanNumber)
+	public Movie(int pId, int pBudget, String pGenres, String pImbd_id, String pOriginalLanguage, String pOrigninalTitle, String pOverview, double pPopularity, String pProductionCompanies, String pProductionCountries, String pSpokenLanguages, String pReleaseDate, int pRevenue, int pRuntime,String pStatus, String pTagline, String pTitle, double pVoteAverage, int pVoteDiscount, int pPCompNumber, int pPCountNumber, int pSpokenLanNumber)
 	{
 		id = pId;
 		budget = pBudget;
@@ -80,8 +85,10 @@ public class Movie implements Comparable<Movie>{
 		popularity = pPopularity;
 		productionCompanies = pProductionCompanies;
 		productionCountries = pProductionCountries;
+		spokenLanguages = pSpokenLanguages;
 		releaseDate = pReleaseDate;
 		revenue = pRevenue;
+		runtime = pRuntime;
 		status = pStatus;
 		tagline = pTagline;
 		title = pTitle;
@@ -149,6 +156,11 @@ public class Movie implements Comparable<Movie>{
 		return productionCountries;
 	}
 	
+	public String getSpokenLanguages()
+	{
+		return spokenLanguages;
+	}
+	
 	public String getReleaseDate()
 	{
 		return releaseDate;
@@ -157,6 +169,11 @@ public class Movie implements Comparable<Movie>{
 	public int getRevenue()
 	{
 		return revenue;
+	}
+	
+	public int getRuntime()
+	{
+		return runtime;
 	}
 	
 	public String getStatus()
