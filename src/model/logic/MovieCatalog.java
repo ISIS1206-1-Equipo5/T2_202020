@@ -1,9 +1,7 @@
 package model.logic;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Reader;
 import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -14,8 +12,11 @@ import model.data_structures.IArregloDinamico;
 
 public class MovieCatalog {
 	
+	//ATRIBUTOS
+	
 	private IArregloDinamico<Movie> movies;
 	
+	//CONSTRUCTORES
 	public MovieCatalog() {
 		movies = new ArregloDinamico<Movie>(0);
 	}
@@ -24,6 +25,7 @@ public class MovieCatalog {
 		movies = new ArregloDinamico<Movie>(capacidad);
 	}
 	
+	//MÉTODOS
 	public void readData(String path1, String path2)
 	{
 		try {
@@ -47,6 +49,11 @@ public class MovieCatalog {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void addMovie(Movie movie)
+	{
+		movies.addLast(movie);
 	}
 
 }
