@@ -26,7 +26,7 @@ public class Movie implements Comparable<Movie>{
 	private String overview;
 	
 	@CsvBindByPosition(position = 7)
-	private double popularity;
+	private String popularity;
 	
 	@CsvBindByPosition(position = 8)
 	private String productionCompanies;
@@ -73,31 +73,6 @@ public class Movie implements Comparable<Movie>{
 	private Casting casting;
 	
 	
-	public Movie(int pId, int pBudget, String pGenres, String pImbd_id, String pOriginalLanguage, String pOrigninalTitle, String pOverview, double pPopularity, String pProductionCompanies, String pProductionCountries, String pReleaseDate, int pRevenue, String pSpokenLanguages, int pRuntime,String pStatus, String pTagline, String pTitle, double pVoteAverage, int pVoteDiscount, int pPCompNumber, int pPCountNumber, int pSpokenLanNumber)
-	{
-		id = pId;
-		budget = pBudget;
-		genres = pGenres;
-		imbd_id = pImbd_id;
-		originalLanguage = pOriginalLanguage;
-		originalTitle = pOrigninalTitle;
-		overview = pOverview;
-		popularity = pPopularity;
-		productionCompanies = pProductionCompanies;
-		productionCountries = pProductionCountries;
-		spokenLanguages = pSpokenLanguages;
-		releaseDate = pReleaseDate;
-		revenue = pRevenue;
-		runtime = pRuntime;
-		status = pStatus;
-		tagline = pTagline;
-		title = pTitle;
-		voteAverage = pVoteAverage;
-		productionCompaniesNumber = pPCompNumber;
-		productionCountriesNumber = pPCountNumber;
-		spokenLanguagesNumber = pSpokenLanNumber;
-		casting = null;
-	}
 	
 	public int getId()
 	{
@@ -141,7 +116,7 @@ public class Movie implements Comparable<Movie>{
 		return overview;
 	}
 	
-	public double getPopularity()
+	public String getPopularity()
 	{
 		return popularity;
 	}

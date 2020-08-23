@@ -33,7 +33,7 @@ public class MovieCatalog {
 	{
 		try {
 			
-			List<Movie> infoPeliculas = new CsvToBeanBuilder(new FileReader(path1)).withType(Movie.class).withSeparator(';').build().parse();
+			List<Movie> infoPeliculas = new CsvToBeanBuilder(new FileReader(path1)).withType(Movie.class).withSeparator(';').withSkipLines(1).build().parse();
 			List<Casting> infoCasting = new CsvToBeanBuilder(new FileReader(path2)).withType(Casting.class).withSeparator(';').build().parse();
 
 			
