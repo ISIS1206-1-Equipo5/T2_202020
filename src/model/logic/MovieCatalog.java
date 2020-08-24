@@ -106,7 +106,7 @@ public class MovieCatalog {
 
 		if(goodMovies.isEmpty())
 		{
-			throw new Exception("No se encontró el director o el director no tiene buenas películas");
+			throw new Exception("No se encontro el director o el director no tiene buenas peliculas");
 		}
 
 		return goodMovies;
