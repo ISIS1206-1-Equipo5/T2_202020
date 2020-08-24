@@ -33,25 +33,29 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-
+		
 		while( !fin ){
 			view.printMenu();
 
 			int option = lector.nextInt();
 			switch(option){
 			case 1:
-				view.printMessage("--------- \nSe están cargando los datos ");
+				view.printMessage("--------- \nSe estan cargando los datos ");
 				catalogo.readData(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS);
-				view.printMessage("Catálogo creado");
+				view.printMessage("Catalogo creado");
 				view.printMovieInfo(catalogo.getFirstMovie());
 				view.printMovieInfo(catalogo.getLastMovie());
-				view.printMessage("Se encontraron  " + catalogo.getMovieCount() + " películas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");						
+				view.printMessage("Se encontraron  " + catalogo.getMovieCount() + " peliculas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");						
 				break;
 
 			case 2:
 				view.printMessage("--------- \nDar el nombre del director a buscar:");
-				String mensaje = lector.next();
+				String name = lector.next();
+				String lastname = lector.next();
+				
+				String mensaje = name + " " + lastname;
 				try {
+					
 					view.printMoviesInfo(catalogo.goodMoviesByDirectorName(mensaje));
 					break;
 				} 
