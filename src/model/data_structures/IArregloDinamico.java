@@ -95,28 +95,4 @@ public interface IArregloDinamico<T extends Comparable<T>> {
 	 */
 	void changeInfo(int pos, T elem);
 
-	//TODO elimnar luego lo que esté abajo de este to-do.
-
-	/**
-	 * Buscar un dato en el arreglo.
-	 * @param dato Objeto de busqueda en el arreglo
-	 * @return elemento encontrado en el arreglo (si existe). null si no se encontro el dato.
-	 */
-	T buscar( T dato );
-
-	/**
-	 * Eliminar un dato del arreglo.
-	 * Los datos restantes deben quedar "compactos" desde la posicion 0.
-	 * @param dato Objeto de eliminacion en el arreglo
-	 * @return dato eliminado
-	 */
-	T eliminar( T dato );
-
-	/**
-	 * Retornar el elemento en la posicion i
-	 * @param i posicion de consulta
-	 * @return elemento de consulta. null si no hay elemento en posicion.
-	 */
-	T darElemento( int i );
-
 }

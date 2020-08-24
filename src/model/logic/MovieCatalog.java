@@ -5,9 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.beanutils.converters.StringArrayConverter;
-
-import com.opencsv.CSVIterator;
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -96,9 +93,9 @@ public class MovieCatalog {
 	{
 		ArregloDinamico<Movie> goodMovies = new ArregloDinamico<>(1);
 
-		for(int i = 1; i< movies.size(); i++)
+		for(int i = 0; i< movies.size(); i++)
 		{
-			Movie m = movies.getElement(i);
+			Movie m = movies.getElement(i+1);
 
 			if(m.getVoteAverage()>= POSSITIVE_AVERAGE && m.getCasting().getDirector().getName().equals(name))
 				goodMovies.addLast(m);

@@ -2,8 +2,6 @@ package controller;
 
 import java.util.Scanner;
 
-import model.data_structures.ArregloDinamico;
-import model.logic.Modelo;
 import model.logic.MovieCatalog;
 import view.View;
 
