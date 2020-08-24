@@ -17,8 +17,8 @@ public class View
 
 	public void printMenu()
 	{
-		System.out.println("1. Cargar información de las películas");
-		System.out.println("2. Buscar las buenas películas de un director");
+		System.out.println("1. Cargar informacion de las peliculas");
+		System.out.println("2. Buscar las buenas peliculas de un director");
 		System.out.println("3. Exit");
 		System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Return: (e.g., 1):");
 	}
