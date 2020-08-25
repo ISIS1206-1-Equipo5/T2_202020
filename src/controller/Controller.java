@@ -31,7 +31,7 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		
+
 		while( !fin ){
 			view.printMenu();
 
@@ -41,19 +41,27 @@ public class Controller {
 				view.printMessage("--------- \nSe estan cargando los datos ");
 				catalogo.readData(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS);
 				view.printMessage("Catalogo creado");
-				view.printMovieInfo(catalogo.getFirstMovie());
-				view.printMovieInfo(catalogo.getLastMovie());
+				//TODO Revisar el manejo de la excepción
+				try
+				{
+					view.printMovieInfo(catalogo.getFirstMovie());
+					view.printMovieInfo(catalogo.getLastMovie());
+				}
+				catch(Exception e)
+				{
+					view.printMessage(e.getMessage());
+				}
 				view.printMessage("Se encontraron  " + catalogo.getMovieCount() + " peliculas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");						
 				break;
 
 			case 2:
-				view.printMessage("--------- \nDar el nombre del director a buscar:");
+				view.printMessage("--------- \nDar el nombre completo del director a buscar:");
 				String name = lector.next();
 				String lastname = lector.next();
-				
+
 				String mensaje = name + " " + lastname;
 				try {
-					
+
 					view.printMoviesInfo(catalogo.goodMoviesByDirectorName(mensaje));
 					break;
 				} 
@@ -61,7 +69,7 @@ public class Controller {
 					System.out.println(e.getMessage());
 					break;
 				}						
-				
+
 
 			case 3: 
 				view.printMessage("--------- \n Hasta pronto !! \n---------"); 
