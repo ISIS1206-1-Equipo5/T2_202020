@@ -63,12 +63,12 @@ public class MovieCatalog {
 				String pProducerNumber = nextLine[16];
 				String screenplayName = nextLine[17];
 				String editorName = nextLine[18];
-				
-				
+
+
 				Movie m = infoPeliculas.get(i);
 				m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
 				movies.addLast(m);
-				
+
 				i++;
 			}
 
@@ -113,12 +113,23 @@ public class MovieCatalog {
 		return movies.size();
 	}
 
-	public Movie getFirstMovie() {
-		return movies.firstElement();
+	//TODO Revisar el manejo de la excepcion 
+	public Movie getFirstMovie() throws Exception{
+		try {
+			return movies.firstElement();
+		} catch (Exception e) {
+
+			throw new Exception(e.getMessage());
+		}
 	}
 
-	public Movie getLastMovie() {
-		return movies.lastElement();
+	//TODO Revisar el manejo de la excepcion 
+	public Movie getLastMovie()  throws Exception{
+		try {
+			return movies.lastElement();
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 
 
