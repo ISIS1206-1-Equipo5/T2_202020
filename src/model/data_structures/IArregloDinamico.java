@@ -35,38 +35,38 @@ public interface IArregloDinamico<T extends Comparable<T>> {
 	 * @param element nuevo elemento
 	 * @param pos posición a insertar
 	 */
-	public void insertElement(T element, int pos);
+	public void insertElement(T element, int pos) throws IndexOutOfBoundsException;
 
 	/**
 	 * Elimina el primer elemento.
 	 * @return El elemento eliminado
 	 */
-	T removeFirst();
+	public T removeFirst() throws Exception;
 
 	/**
 	 * Elimina el último elemento.
 	 * @return El elemento eliminado
 	 */
-	T removeLast();
+	T removeLast() throws Exception;
 
 	/**
 	 * Elimina el elemento en la posición dada.
 	 * @param pos posición de elemento a eliminar
 	 * @return El elemento eliminado
 	 */
-	T deleteElement(int pos);
+	T deleteElement(int pos) throws Exception;
 
 	/**
 	 * Retorna el primer elemento.
 	 * @return 
 	 */
-	T firstElement();
+	T firstElement() throws Exception;
 
 	/**
 	 * Retorna el último elemento.
 	 * @return
 	 */
-	T lastElement();
+	T lastElement() throws Exception;
 
 	/**
 	 * Determina si el arreglo no tiene datos.
@@ -86,13 +86,13 @@ public interface IArregloDinamico<T extends Comparable<T>> {
 	 * @param pos1 Posición del primer elemento
 	 * @param pos2 Posición del segundo elemento.
 	 */
-	void exchange(int pos1, int pos2);
+	void exchange(int pos1, int pos2) throws IndexOutOfBoundsException;
 
 	/**
 	 * Actualiza el elemento en una posición válida
 	 * @param pos Posición del elemento
 	 * @param elem Objeto con actualización de información
 	 */
-	void changeInfo(int pos, T elem);
+	void changeInfo(int pos, T elem) throws IndexOutOfBoundsException;
 
 }

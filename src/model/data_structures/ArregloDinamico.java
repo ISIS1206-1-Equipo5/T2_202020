@@ -75,8 +75,12 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	}
 
 	//Ojo con las posiciones, que empiezan desde 1
-	//TODO posible exception en caso de no estar dentro de la posici贸n
-	public void insertElement(T element, int pos) {
+	//TODO Revisar el manejo de la excepci髇.
+	public void insertElement(T element, int pos) throws IndexOutOfBoundsException {
+		
+		if(tamanoAct < pos)
+			throw new IndexOutOfBoundsException(pos-1);
+		
 		tamanoAct++;
 		if ( tamanoAct == tamanoMax )
 		{  // caso de arreglo lleno (aumentar tamaNo)
@@ -101,8 +105,12 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 		elementos[tamanoAct] = actual;
 	}
 
-	//TODO Exception si no hay elementos en el arreglo.
-	public T removeFirst() {
+	//TODO Revisar el manejo de la excepcion.
+	public T removeFirst() throws Exception{
+		
+		if(tamanoAct == 0)
+			throw new Exception("El arreglo no tiene elementos");
+		
 		T primero = elementos[0];
 
 		for (int i = 0; i < tamanoAct-1; i++) {
@@ -116,17 +124,25 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	}
 
 
-	//TODO Exception si no hay elementos en el arreglo.
-	public T removeLast() {
+	//TODO Revisar el manejo de la excepcion.
+	public T removeLast()  throws Exception{
+		
+		if(tamanoAct == 0)
+			throw new Exception("El arreglo no tiene elementos");
+		
 		T ultimo = elementos[tamanoAct-1];
 		elementos[tamanoAct-1] = null;
 		tamanoAct--;
 		return ultimo;
 	}
 
-	//Ojo con las posiciones, que empiezan desde 1
-	//TODO posible exception en caso de no estar dentro de la posici贸n
-	public T deleteElement(int pos) {
+	//Ojo con las posiciones, que empiezan desde 1	
+	//TODO Revisar el manejo de la excepcion.
+	public T deleteElement(int pos) throws IndexOutOfBoundsException {
+		
+		if(tamanoAct < pos)
+			throw new IndexOutOfBoundsException(pos-1);
+		
 		T aEliminar = elementos[pos-1];
 
 		for (int i = pos-1; i < tamanoAct-1; i++) {
@@ -138,18 +154,30 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 		return aEliminar;
 	}
 
-	//TODO Exception si no hay elementos en el arreglo.
-	public T firstElement() {
+	//TODO Revisar el manejo de la excepcion.
+	public T firstElement() throws Exception{
+		
+		if(tamanoAct == 0)
+			throw new Exception("El arreglo no tiene elementos");		
+		
 		return elementos[0];
 	}
 
-	//TODO Exception si no hay elementos en el arreglo.
-	public T lastElement() {
+	//TODO Revisar el manejo de la excepcion.
+	public T lastElement() throws Exception{
+		
+		if(tamanoAct == 0)
+			throw new Exception("El arreglo no tiene elementos");
+		
 		return elementos[tamanoAct-1];
 	}
 
-	//TODO posible exception en caso de no estar dentro de la posici贸n
-	public T getElement(int pos) {
+	//TODO Revisar el manejo de la excepcion.
+	public T getElement(int pos) throws IndexOutOfBoundsException{
+		
+		if(tamanoAct < pos)
+			throw new IndexOutOfBoundsException(pos-1);
+		
 		return elementos[pos-1];
 	}
 
@@ -181,8 +209,15 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	}
 
 	//Ojo con la posici贸n, empieza desde 1
-	//TODO posible exception en caso de no estar dentro de la posici贸n
-	public void exchange(int pos1, int pos2) {
+	//TODO Revisar el manejo de la excepcion.
+	public void exchange(int pos1, int pos2) throws IndexOutOfBoundsException{
+		
+		if(tamanoAct < pos1)
+			throw new IndexOutOfBoundsException(pos1-1);
+		
+		if(tamanoAct < pos2)
+			throw new IndexOutOfBoundsException(pos2-1);
+		
 		T objeto1 = getElement(pos1);
 		T objeto2 = getElement(pos2);
 
@@ -191,8 +226,12 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	}
 
 	//Ojo con la posici贸n, empieza desde 1
-	//TODO posible exception en caso de no estar dentro de la posici贸n
-	public void changeInfo(int pos, T elem) {
+	//TODO Revisar el manejo de la excepcion.
+	public void changeInfo(int pos, T elem) throws IndexOutOfBoundsException{
+		
+		if(tamanoAct < pos)
+			throw new IndexOutOfBoundsException(pos-1);
+		
 		elementos[pos-1] = elem;
 	}
 
