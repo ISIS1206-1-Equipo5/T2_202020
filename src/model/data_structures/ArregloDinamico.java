@@ -78,7 +78,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	//TODO Revisar el manejo de la excepci�n.
 	public void insertElement(T element, int pos) throws IndexOutOfBoundsException {
 		
-		if(tamanoMax < pos)
+		if(tamanoAct < pos || pos < 1)
 			throw new IndexOutOfBoundsException(pos-1);
 		
 		tamanoAct++;
@@ -140,7 +140,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	//TODO Revisar el manejo de la excepcion.
 	public T deleteElement(int pos) throws IndexOutOfBoundsException {
 		
-		if(tamanoAct < pos)
+		if(tamanoAct < pos || pos < 1)
 			throw new IndexOutOfBoundsException(pos-1);
 		
 		T aEliminar = elementos[pos-1];
@@ -175,7 +175,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	//TODO Revisar el manejo de la excepcion.
 	public T getElement(int pos) throws IndexOutOfBoundsException{
 		
-		if(tamanoAct < pos)
+		if(tamanoAct < pos || pos < 1)
 			throw new IndexOutOfBoundsException(pos-1);
 		
 		return elementos[pos-1];
@@ -212,10 +212,10 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	//TODO Revisar el manejo de la excepcion.
 	public void exchange(int pos1, int pos2) throws IndexOutOfBoundsException{
 		
-		if(tamanoAct < pos1)
+		if(tamanoAct < pos1 || pos1 < 1)
 			throw new IndexOutOfBoundsException(pos1-1);
 		
-		if(tamanoAct < pos2)
+		if(tamanoAct < pos2 || pos2 < 1)
 			throw new IndexOutOfBoundsException(pos2-1);
 		
 		T objeto1 = getElement(pos1);
@@ -229,7 +229,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	//TODO Revisar el manejo de la excepcion.
 	public void changeInfo(int pos, T elem) throws IndexOutOfBoundsException{
 		
-		if(tamanoAct < pos)
+		if(tamanoAct < pos || pos < 1)
 			throw new IndexOutOfBoundsException(pos-1);
 		
 		elementos[pos-1] = elem;
