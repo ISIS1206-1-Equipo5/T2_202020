@@ -78,7 +78,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements IArregloDinami
 	//TODO Revisar el manejo de la excepci�n.
 	public void insertElement(T element, int pos) throws IndexOutOfBoundsException {
 		
-		if(tamanoAct < pos || pos < 1)
+		if(tamanoAct+1 < pos || pos < 1)
 			throw new IndexOutOfBoundsException(pos-1);
 		
 		tamanoAct++;
