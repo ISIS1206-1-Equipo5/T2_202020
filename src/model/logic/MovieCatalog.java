@@ -38,7 +38,7 @@ public class MovieCatalog {
 	}
 
 	//MÉTODOS
-	public void readDataArregloDinamico(String path1, String path2, int pEstructura)
+	public void readData(String path1, String path2, int pEstructura)
 	{
 		movies = null;
 
@@ -143,13 +143,6 @@ public class MovieCatalog {
 		}
 	}
 
-	public Movie[] getWorseMovies()
-	{
-		//TODO implementar
-		return null;
-
-	}
-
 	public Movie[] getStructureArray() {
 		Movie[] arregloFijo = new Movie[movies.size()];
 
@@ -159,6 +152,20 @@ public class MovieCatalog {
 			arregloFijo[i] = m;
 		}
 		return arregloFijo;
+	}
+	
+	public Movie[] getWorstMovies()
+	{
+		Movie[] arreglo= this.getStructureArray();
+		Movie[] worseMovies = new Movie[20];
+		ShellSort.shellSort(arreglo);
+		
+		for(int i=0; i<worseMovies.length; i++)
+		{
+			worseMovies[i] = arreglo[i];
+		}
+		
+		return worseMovies;
 	}
 
 
