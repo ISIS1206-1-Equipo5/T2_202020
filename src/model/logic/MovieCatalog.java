@@ -77,7 +77,7 @@ public class MovieCatalog {
 					moviesArregloDinamico.addLast(m);
 					i++;
 				}
-				else if(pEstructura == ARREGLO_DINAMICO)
+				else if(pEstructura == LISTA_ENCADENADA)
 				{
 					Movie m = infoPeliculas.get(i);
 					m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
