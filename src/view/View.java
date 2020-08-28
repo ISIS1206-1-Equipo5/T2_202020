@@ -18,7 +18,8 @@ public class View
 	{
 		System.out.println("1. Cargar informacion de las peliculas");
 		System.out.println("2. Buscar las buenas peliculas de un director");
-		System.out.println("3. Exit");
+		System.out.println("3. Dar las 20 películas con peor promedio de votación");
+		System.out.println("4. Exit");
 		System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Return: (e.g., 1):");
 	}
 
@@ -45,13 +46,13 @@ public class View
 		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 
-	public void printMoviesInfo(ArregloDinamico<Movie> pMovies){
+	public void printMoviesInfo(Movie[] pMovies){
 			
-		System.out.println("Películas encontradas: " + pMovies.size());
+		System.out.println("Películas encontradas: " + pMovies.length);
 		
-		for(int i = 0; i < pMovies.size(); i++)
+		for(int i = 0; i < pMovies.length; i++)
 		{
-			printMovieInfo(pMovies.getElement(i+1));
+			printMovieInfo(pMovies[i]);
 		}
 		
 	}

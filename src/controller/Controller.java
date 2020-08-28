@@ -3,6 +3,7 @@ package controller;
 import java.util.Scanner;
 
 import model.logic.MovieCatalog;
+import model.logic.Stopwatch;
 import view.View;
 
 public class Controller {
@@ -44,7 +45,9 @@ public class Controller {
 				estructura = lector.nextInt();
 				catalogo = new MovieCatalog(estructura);
 				view.printMessage("--------- \nSe estan cargando los datos ");
+				Stopwatch timer = new Stopwatch();
 				catalogo.readData(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS, estructura);
+				double tiempo = timer.elapsedTime();
 				view.printMessage("Catalogo creado");
 				//TODO Revisar el manejo de la excepci�n
 				try
@@ -56,7 +59,8 @@ public class Controller {
 				{
 					view.printMessage(e.getMessage());
 				}
-				view.printMessage("Se encontraron " + catalogo.getMovieCount() + " peliculas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");						
+				view.printMessage("Se encontraron " + catalogo.getMovieCount() + " peliculas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");		
+				view.printMessage("Los datos fueron cargados en " + tiempo + " segundos.");
 				break;
 
 			case 2:
@@ -76,9 +80,22 @@ public class Controller {
 					System.out.println(e.getMessage());
 					break;
 				}						
-
-
+			
 			case 3: 
+				view.printMessage("Las 20 películas con el peor promedio de votación son:");
+				try {
+					if(catalogo != null)
+						view.printMoviesInfo(catalogo.getWorstMovies());
+					else
+						System.out.println("No se han cargado los datos." );
+					break;
+				} 
+				catch (Exception e) {
+					System.out.println(e.getMessage());
+					break;
+				}
+
+			case 4: 
 				view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;

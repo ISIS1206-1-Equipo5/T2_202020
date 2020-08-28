@@ -100,7 +100,7 @@ public class MovieCatalog {
 	}
 
 
-	public ArregloDinamico<Movie> goodMoviesByDirectorName(String name) throws Exception 
+	public Movie[] goodMoviesByDirectorName(String name) throws Exception 
 	{
 		ArregloDinamico<Movie> goodMovies = new ArregloDinamico<>(1);
 
@@ -116,8 +116,15 @@ public class MovieCatalog {
 		{
 			throw new Exception("No se encontro el director o el director no tiene buenas peliculas");
 		}
+		
+		Movie[] arregloFijo = new Movie[goodMovies.size()];
 
-		return goodMovies;
+		for(int i = 0; i< goodMovies.size(); i++)
+		{
+			Movie m = goodMovies.getElement(i+1);
+			arregloFijo[i] = m;
+		}
+		return arregloFijo;
 	}
 
 	public int getMovieCount() {
