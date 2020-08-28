@@ -3,13 +3,10 @@ package model.logic;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
-
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 
 import model.data_structures.ArregloDinamico;
@@ -101,9 +98,8 @@ public class MovieCatalog {
 
 				Casting pCasting = new Casting(pIdC, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName);
 				Movie m = new Movie(pIdM, pBudget, pGenres, pImdb, pOriginalLanguage, pOriginalTitle, pOverview, pPopularity, pProductionCompanies, pProductionCountries, pReleaseDate, pRevenue, pRuntime, pSpokenLanguages, pStatus, pTagline, pTitle, pVoteAverage, pVotecount, pProductionCompaniesNumber, pProductionCountriesNumber, pSpokenLanguagesNumber, pCasting);
-				movies.addFirst(m);
+				movies.addLast(m);
 			}
-
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
