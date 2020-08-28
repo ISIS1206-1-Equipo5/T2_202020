@@ -43,6 +43,8 @@ public class Controller {
 				view.printMessage("\n1.Arreglo Dinámico");
 				view.printMessage("2.Lista encadenada");
 				estructura = lector.nextInt();
+				if (estructura ==1 || estructura ==2)
+				{
 				catalogo = new MovieCatalog(estructura);
 				view.printMessage("--------- \nSe estan cargando los datos ");
 				Stopwatch timer = new Stopwatch();
@@ -61,6 +63,10 @@ public class Controller {
 				}
 				view.printMessage("Se encontraron " + catalogo.getMovieCount() + " peliculas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");		
 				view.printMessage("Los datos fueron cargados en " + tiempo + " segundos.");
+				}
+				else {
+					view.printMessage("--------- \n Opcion Invalida !! \n---------");
+				}
 				break;
 
 			case 2:
