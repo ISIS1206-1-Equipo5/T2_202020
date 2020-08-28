@@ -1,78 +1,79 @@
 package model.logic;
 
-import com.opencsv.bean.CsvBindByPosition;
-
 public class Movie implements Comparable<Movie>{
 	
-	@CsvBindByPosition(position = 0)
 	private int id;
 	
-	@CsvBindByPosition(position = 1)
 	private int budget;
 
-	@CsvBindByPosition(position = 2)
 	private String genres;
 	
-	@CsvBindByPosition(position = 3)
 	private String imbd_id;
 	
-	@CsvBindByPosition(position = 4)
 	private String originalLanguage;
 	
-	@CsvBindByPosition(position = 5)
 	private String originalTitle;
 	
-	@CsvBindByPosition(position = 6)
 	private String overview;
 	
-	@CsvBindByPosition(position = 7)
 	private String popularity;
 	
-	@CsvBindByPosition(position = 8)
 	private String productionCompanies;
 	
-	@CsvBindByPosition(position = 9)
 	private String productionCountries;
 	
-	@CsvBindByPosition(position = 10)
 	private String releaseDate;
 	
-	@CsvBindByPosition(position = 11)
 	private int revenue;
 		
-	@CsvBindByPosition(position = 12)
 	private int runtime;
 	
-	@CsvBindByPosition(position = 13)
 	private String spokenLanguages;
 		
-	@CsvBindByPosition(position = 14)
 	private String status;
 	
-	@CsvBindByPosition(position = 15)
 	private String tagline;
 	
-	@CsvBindByPosition(position = 16)
 	private String title;
 	
-	@CsvBindByPosition(position = 17)
 	private double voteAverage;
 	
-	@CsvBindByPosition(position = 18)
 	private int voteCount;
 	
-	@CsvBindByPosition(position = 19)
 	private int productionCompaniesNumber;
 	
-	@CsvBindByPosition(position = 20)
 	private int productionCountriesNumber;
 	
-	@CsvBindByPosition(position = 21)
 	private int spokenLanguagesNumber;
 	
 	private Casting casting;
 	
-	
+	public Movie(String pId, String pBudget, String pGenres, String pImdb, String pOriginalLanguage, String pOriginalTitle, String pOverview, String pPopularity, String pProductionCompanies, String pProductionCountries, String pReleaseDate, String pRevenue, String pRuntime, String pSpokenLanguages, String pStatus, String pTagline, String pTitle, String pVoteAverage, String pVotecount, String pProductionCompaniesNumber, String pProductionCountriesNumber,String pSpokenLanguagesNumber, Casting pCasting)
+	{
+		id = Integer.parseInt(pId);
+		budget = Integer.parseInt(pBudget);
+		genres = pGenres;
+		imbd_id = pImdb;
+		originalLanguage = pOriginalLanguage;
+		originalTitle = pOriginalTitle;
+		overview = pOverview;
+		popularity = pPopularity;
+		productionCompanies = pProductionCompanies;
+		productionCountries = pProductionCountries;
+		releaseDate = pReleaseDate;
+		revenue = Integer.parseInt(pRevenue);
+		runtime = Integer.parseInt(pRuntime);
+		spokenLanguages = pSpokenLanguages;
+		status = pStatus;
+		tagline = pTagline;
+		title = pTitle;
+		voteAverage = Double.parseDouble(pVoteAverage);
+		voteCount = Integer.parseInt(pVotecount);
+		productionCompaniesNumber = Integer.parseInt(pProductionCompaniesNumber);
+		productionCountriesNumber = Integer.parseInt(pProductionCountriesNumber);
+		spokenLanguagesNumber = Integer.parseInt(pSpokenLanguagesNumber);
+		casting = pCasting;
+	}
 	
 	public int getId()
 	{
@@ -201,7 +202,6 @@ public class Movie implements Comparable<Movie>{
 		casting = pCasting;
 	}
 
-	@Override
 	public int compareTo(Movie o) 
 	{
 		if(this.voteAverage < o.getVoteAverage())

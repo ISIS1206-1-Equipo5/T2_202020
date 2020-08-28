@@ -13,7 +13,6 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 
 import model.data_structures.ArregloDinamico;
-import model.data_structures.IArregloDinamico;
 import model.data_structures.ILista;
 import model.data_structures.ListaEncadenada;
 
@@ -49,38 +48,60 @@ public class MovieCatalog {
 		//moviesListaEncadenada = new ListaEncadenada<Movie>(0);
 
 		try {
-			List<Movie> infoPeliculas = new CsvToBeanBuilder(new FileReader(path1)).withType(Movie.class).withSeparator(';').withSkipLines(1).build().parse();
 			CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
-			CSVReader reader = new CSVReaderBuilder(new FileReader(path2)).withCSVParser(parser).withSkipLines(1).build();
-			String [] nextLine;
-			int i = 0;
-			while ((nextLine = reader.readNext()) != null) {
-				String pId = nextLine[0];
-				String actor1Name = nextLine[1];
-				String actor1Gender = nextLine[2];
-				String actor2Name = nextLine[3];
-				String actor2Gender = nextLine[4];
-				String actor3Name = nextLine[5];
-				String actor3Gender = nextLine[6];
-				String actor4Name = nextLine[7];
-				String actor4Gender = nextLine[8];
-				String actor5Name = nextLine[9];
-				String actor5Gender = nextLine[10];
-				String pActorNumber = nextLine[11];
-				String directorName = nextLine[12];
-				String directorGender = nextLine[13];
-				String pDirectorNumber = nextLine[14];
-				String pProducerName = nextLine[15];
-				String pProducerNumber = nextLine[16];
-				String screenplayName = nextLine[17];
-				String editorName = nextLine[18];
+			CSVReader readerCasting = new CSVReaderBuilder(new FileReader(path2)).withCSVParser(parser).withSkipLines(1).build();
+			
+			CSVReader readerMovie = new CSVReaderBuilder(new FileReader(path1)).withCSVParser(parser).withSkipLines(1).build();
 
+			String [] nextLineCasting;
+			String[] nextLineMovies;
+			while ((nextLineCasting = readerCasting.readNext()) != null && (nextLineMovies = readerMovie.readNext()) != null) {
+				String pIdC = nextLineCasting[0];
+				String actor1Name = nextLineCasting[1];
+				String actor1Gender = nextLineCasting[2];
+				String actor2Name = nextLineCasting[3];
+				String actor2Gender = nextLineCasting[4];
+				String actor3Name = nextLineCasting[5];
+				String actor3Gender = nextLineCasting[6];
+				String actor4Name = nextLineCasting[7];
+				String actor4Gender = nextLineCasting[8];
+				String actor5Name = nextLineCasting[9];
+				String actor5Gender = nextLineCasting[10];
+				String pActorNumber = nextLineCasting[11];
+				String directorName = nextLineCasting[12];
+				String directorGender = nextLineCasting[13];
+				String pDirectorNumber = nextLineCasting[14];
+				String pProducerName = nextLineCasting[15];
+				String pProducerNumber = nextLineCasting[16];
+				String screenplayName = nextLineCasting[17];
+				String editorName = nextLineCasting[18];
+				
+				String pIdM = nextLineMovies[0];
+				String pBudget = nextLineMovies[1];
+				String pGenres = nextLineMovies[2];
+				String pImdb = nextLineMovies[3];
+				String pOriginalLanguage = nextLineMovies[4];
+				String pOriginalTitle = nextLineMovies[5];
+				String pOverview = nextLineMovies[6];
+				String pPopularity = nextLineMovies[7];
+				String pProductionCompanies = nextLineMovies[8];
+				String pProductionCountries = nextLineMovies[9];
+				String pReleaseDate = nextLineMovies[10];
+				String pRevenue = nextLineMovies[11];
+				String pRuntime = nextLineMovies[12];
+				String pSpokenLanguages = nextLineMovies[13];
+				String pStatus = nextLineMovies[14];
+				String pTagline = nextLineMovies[15];
+				String pTitle = nextLineMovies[16];
+				String pVoteAverage = nextLineMovies[17];
+				String pVotecount = nextLineMovies[18];
+				String pProductionCompaniesNumber = nextLineMovies[19];
+				String pProductionCountriesNumber = nextLineMovies[20];
+				String pSpokenLanguagesNumber = nextLineMovies[21];
 
-				Movie m = infoPeliculas.get(i);
-				m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
-				movies.addLast(m);
-
-				i++;
+				Casting pCasting = new Casting(pIdC, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName);
+				Movie m = new Movie(pIdM, pBudget, pGenres, pImdb, pOriginalLanguage, pOriginalTitle, pOverview, pPopularity, pProductionCompanies, pProductionCountries, pReleaseDate, pRevenue, pRuntime, pSpokenLanguages, pStatus, pTagline, pTitle, pVoteAverage, pVotecount, pProductionCompaniesNumber, pProductionCountriesNumber, pSpokenLanguagesNumber, pCasting);
+				movies.addFirst(m);
 			}
 
 		} catch (IllegalStateException e) {
