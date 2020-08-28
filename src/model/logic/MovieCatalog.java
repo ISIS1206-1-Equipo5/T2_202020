@@ -29,11 +29,14 @@ public class MovieCatalog {
 	private IArregloDinamico<Movie> moviesArregloDinamico;
 
 	private ILista<Movie> moviesListaEncadenada;
+	
+	private int estructuraUsada;
 
 	//CONSTRUCTORES
 	public MovieCatalog() {
 		moviesArregloDinamico = new ArregloDinamico<Movie>(1);
-		moviesListaEncadenada = new ListaEncadenada<Movie>(0);
+		//TODO descomentar
+		//moviesListaEncadenada = new ListaEncadenada<Movie>(0);
 	}
 
 	public MovieCatalog(int capacidad) {
@@ -43,6 +46,12 @@ public class MovieCatalog {
 	//MÉTODOS
 	public void readDataArregloDinamico(String path1, String path2, int pEstructura)
 	{
+		moviesArregloDinamico = null;
+		moviesArregloDinamico = new ArregloDinamico<Movie>(1);
+		//TODO descomentar
+		//moviesListaEncadenada = null;
+		//moviesListaEncadenada = new ListaEncadenada<Movie>(0);
+		estructuraUsada = pEstructura;
 		try {
 			List<Movie> infoPeliculas = new CsvToBeanBuilder(new FileReader(path1)).withType(Movie.class).withSeparator(';').withSkipLines(1).build().parse();
 			CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
@@ -75,15 +84,15 @@ public class MovieCatalog {
 					Movie m = infoPeliculas.get(i);
 					m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
 					moviesArregloDinamico.addLast(m);
-					i++;
+
 				}
 				else if(pEstructura == LISTA_ENCADENADA)
 				{
 					Movie m = infoPeliculas.get(i);
 					m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
 					moviesListaEncadenada.addFirst(m);
-					i++;
 				}
+				i++;
 			}
 
 		} catch (IllegalStateException e) {
@@ -144,6 +153,35 @@ public class MovieCatalog {
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
+	}
+	
+	public Movie[] getWorseMovies()
+	{
+		//TODO implementar
+		return null;
+		
+	}
+	
+	public Movie[] getStructureArray() {
+		Movie[] arregloFijo = null;
+		if(estructuraUsada == ARREGLO_DINAMICO) {
+			arregloFijo = new Movie[moviesArregloDinamico.size()];
+			for(int i = 0; i< moviesArregloDinamico.size(); i++)
+			{
+				Movie m = moviesArregloDinamico.getElement(i+1);
+				arregloFijo[i] = m;
+			}
+		}
+		else if(estructuraUsada == LISTA_ENCADENADA) {
+			arregloFijo = new Movie[moviesListaEncadenada.size()];
+			for(int i = 0; i< moviesListaEncadenada.size(); i++)
+			{
+				Movie m = moviesListaEncadenada.getElement(i+1);
+				arregloFijo[i] = m;
+			}
+		}
+		
+		return arregloFijo;
 	}
 
 

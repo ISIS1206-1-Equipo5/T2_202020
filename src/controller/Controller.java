@@ -31,6 +31,7 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
+		int estructura = 0;
 
 		while( !fin ){
 			view.printMenu();
@@ -38,8 +39,12 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 			case 1:
+				view.printMessage("--------- \n¿A qué estructura de datos desea cargar?");
+				view.printMessage("\n1.Arreglo Dinámico");
+				view.printMessage("2.Lista encadenada");
+				estructura = lector.nextInt();
 				view.printMessage("--------- \nSe estan cargando los datos ");
-				catalogo.readDataArregloDinamico(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS);
+				catalogo.readDataArregloDinamico(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS, estructura);
 				view.printMessage("Catalogo creado");
 				//TODO Revisar el manejo de la excepci�n
 				try
