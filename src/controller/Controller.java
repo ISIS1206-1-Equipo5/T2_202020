@@ -39,9 +39,9 @@ public class Controller {
 			switch(option){
 			case 1:
 				view.printMessage("--------- \nSe estan cargando los datos ");
-				catalogo.readData(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS);
+				catalogo.readDataArregloDinamico(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS);
 				view.printMessage("Catalogo creado");
-				//TODO Revisar el manejo de la excepción
+				//TODO Revisar el manejo de la excepciï¿½n
 				try
 				{
 					view.printMovieInfo(catalogo.getFirstMovie());

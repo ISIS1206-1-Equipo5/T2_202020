@@ -14,30 +14,36 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
+import model.data_structures.ILista;
+import model.data_structures.ListaEncadenada;
 
 public class MovieCatalog {
 
 	//CONSTANTES
 
 	private static int POSSITIVE_AVERAGE = 6;
+	public static int ARREGLO_DINAMICO = 1;
+	public static int LISTA_ENCADENADA = 2;
 	//ATRIBUTOS
 
-	private IArregloDinamico<Movie> movies;
+	private IArregloDinamico<Movie> moviesArregloDinamico;
+
+	private ILista<Movie> moviesListaEncadenada;
 
 	//CONSTRUCTORES
 	public MovieCatalog() {
-		movies = new ArregloDinamico<Movie>(1);
+		moviesArregloDinamico = new ArregloDinamico<Movie>(1);
+		moviesListaEncadenada = new ListaEncadenada<Movie>(0);
 	}
 
 	public MovieCatalog(int capacidad) {
-		movies = new ArregloDinamico<Movie>(capacidad);
+		moviesArregloDinamico = new ArregloDinamico<Movie>(capacidad);
 	}
 
 	//MÉTODOS
-	public void readData(String path1, String path2)
+	public void readDataArregloDinamico(String path1, String path2, int pEstructura)
 	{
 		try {
-
 			List<Movie> infoPeliculas = new CsvToBeanBuilder(new FileReader(path1)).withType(Movie.class).withSeparator(';').withSkipLines(1).build().parse();
 			CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
 			CSVReader reader = new CSVReaderBuilder(new FileReader(path2)).withCSVParser(parser).withSkipLines(1).build();
@@ -64,12 +70,20 @@ public class MovieCatalog {
 				String screenplayName = nextLine[17];
 				String editorName = nextLine[18];
 
-
-				Movie m = infoPeliculas.get(i);
-				m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
-				movies.addLast(m);
-
-				i++;
+				if(pEstructura == ARREGLO_DINAMICO)
+				{
+					Movie m = infoPeliculas.get(i);
+					m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
+					moviesArregloDinamico.addLast(m);
+					i++;
+				}
+				else if(pEstructura == ARREGLO_DINAMICO)
+				{
+					Movie m = infoPeliculas.get(i);
+					m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
+					moviesListaEncadenada.addFirst(m);
+					i++;
+				}
 			}
 
 		} catch (IllegalStateException e) {
@@ -85,7 +99,7 @@ public class MovieCatalog {
 
 	public void addMovie(Movie movie)
 	{
-		movies.addLast(movie);
+		moviesArregloDinamico.addLast(movie);
 	}
 
 
@@ -93,9 +107,9 @@ public class MovieCatalog {
 	{
 		ArregloDinamico<Movie> goodMovies = new ArregloDinamico<>(1);
 
-		for(int i = 0; i< movies.size(); i++)
+		for(int i = 0; i< moviesArregloDinamico.size(); i++)
 		{
-			Movie m = movies.getElement(i+1);
+			Movie m = moviesArregloDinamico.getElement(i+1);
 
 			if(m.getVoteAverage()>= POSSITIVE_AVERAGE && m.getCasting().getDirector().getName().equals(name))
 				goodMovies.addLast(m);
@@ -110,13 +124,13 @@ public class MovieCatalog {
 	}
 
 	public int getMovieCount() {
-		return movies.size();
+		return moviesArregloDinamico.size();
 	}
 
 	//TODO Revisar el manejo de la excepcion 
 	public Movie getFirstMovie() throws Exception{
 		try {
-			return movies.firstElement();
+			return moviesArregloDinamico.firstElement();
 		} catch (Exception e) {
 
 			throw new Exception(e.getMessage());
@@ -126,7 +140,7 @@ public class MovieCatalog {
 	//TODO Revisar el manejo de la excepcion 
 	public Movie getLastMovie()  throws Exception{
 		try {
-			return movies.lastElement();
+			return moviesArregloDinamico.lastElement();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
