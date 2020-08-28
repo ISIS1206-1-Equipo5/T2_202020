@@ -26,32 +26,28 @@ public class MovieCatalog {
 	public static int LISTA_ENCADENADA = 2;
 	//ATRIBUTOS
 
-	private IArregloDinamico<Movie> moviesArregloDinamico;
-
-	private ILista<Movie> moviesListaEncadenada;
-	
-	private int estructuraUsada;
+	private ILista<Movie> movies;
 
 	//CONSTRUCTORES
-	public MovieCatalog() {
-		moviesArregloDinamico = new ArregloDinamico<Movie>(1);
+	public MovieCatalog(int estructura) {
+		if(estructura == ARREGLO_DINAMICO)
+			movies = new ArregloDinamico<Movie>(1);
 		//TODO descomentar
+		//else if(estructura== LISTA_ENCADENADA) 
 		//moviesListaEncadenada = new ListaEncadenada<Movie>(0);
-	}
-
-	public MovieCatalog(int capacidad) {
-		moviesArregloDinamico = new ArregloDinamico<Movie>(capacidad);
 	}
 
 	//MÉTODOS
 	public void readDataArregloDinamico(String path1, String path2, int pEstructura)
 	{
-		moviesArregloDinamico = null;
-		moviesArregloDinamico = new ArregloDinamico<Movie>(1);
+		movies = null;
+
+		if(pEstructura == ARREGLO_DINAMICO)
+			movies = new ArregloDinamico<Movie>(1);
 		//TODO descomentar
-		//moviesListaEncadenada = null;
+		//else if(pEstructura== LISTA_ENCADENADA) 
 		//moviesListaEncadenada = new ListaEncadenada<Movie>(0);
-		estructuraUsada = pEstructura;
+
 		try {
 			List<Movie> infoPeliculas = new CsvToBeanBuilder(new FileReader(path1)).withType(Movie.class).withSeparator(';').withSkipLines(1).build().parse();
 			CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
@@ -79,19 +75,11 @@ public class MovieCatalog {
 				String screenplayName = nextLine[17];
 				String editorName = nextLine[18];
 
-				if(pEstructura == ARREGLO_DINAMICO)
-				{
-					Movie m = infoPeliculas.get(i);
-					m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
-					moviesArregloDinamico.addLast(m);
 
-				}
-				else if(pEstructura == LISTA_ENCADENADA)
-				{
-					Movie m = infoPeliculas.get(i);
-					m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
-					moviesListaEncadenada.addFirst(m);
-				}
+				Movie m = infoPeliculas.get(i);
+				m.setCasting(new Casting(pId, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName));
+				movies.addLast(m);
+
 				i++;
 			}
 
@@ -108,7 +96,7 @@ public class MovieCatalog {
 
 	public void addMovie(Movie movie)
 	{
-		moviesArregloDinamico.addLast(movie);
+		movies.addLast(movie);
 	}
 
 
@@ -116,9 +104,9 @@ public class MovieCatalog {
 	{
 		ArregloDinamico<Movie> goodMovies = new ArregloDinamico<>(1);
 
-		for(int i = 0; i< moviesArregloDinamico.size(); i++)
+		for(int i = 0; i< movies.size(); i++)
 		{
-			Movie m = moviesArregloDinamico.getElement(i+1);
+			Movie m = movies.getElement(i+1);
 
 			if(m.getVoteAverage()>= POSSITIVE_AVERAGE && m.getCasting().getDirector().getName().equals(name))
 				goodMovies.addLast(m);
@@ -133,13 +121,13 @@ public class MovieCatalog {
 	}
 
 	public int getMovieCount() {
-		return moviesArregloDinamico.size();
+		return movies.size();
 	}
 
 	//TODO Revisar el manejo de la excepcion 
 	public Movie getFirstMovie() throws Exception{
 		try {
-			return moviesArregloDinamico.firstElement();
+			return movies.firstElement();
 		} catch (Exception e) {
 
 			throw new Exception(e.getMessage());
@@ -149,38 +137,27 @@ public class MovieCatalog {
 	//TODO Revisar el manejo de la excepcion 
 	public Movie getLastMovie()  throws Exception{
 		try {
-			return moviesArregloDinamico.lastElement();
+			return movies.lastElement();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
+
 	public Movie[] getWorseMovies()
 	{
 		//TODO implementar
 		return null;
-		
+
 	}
-	
+
 	public Movie[] getStructureArray() {
-		Movie[] arregloFijo = null;
-		if(estructuraUsada == ARREGLO_DINAMICO) {
-			arregloFijo = new Movie[moviesArregloDinamico.size()];
-			for(int i = 0; i< moviesArregloDinamico.size(); i++)
-			{
-				Movie m = moviesArregloDinamico.getElement(i+1);
-				arregloFijo[i] = m;
-			}
+		Movie[] arregloFijo = new Movie[movies.size()];
+
+		for(int i = 0; i< movies.size(); i++)
+		{
+			Movie m = movies.getElement(i+1);
+			arregloFijo[i] = m;
 		}
-		else if(estructuraUsada == LISTA_ENCADENADA) {
-			arregloFijo = new Movie[moviesListaEncadenada.size()];
-			for(int i = 0; i< moviesListaEncadenada.size(); i++)
-			{
-				Movie m = moviesListaEncadenada.getElement(i+1);
-				arregloFijo[i] = m;
-			}
-		}
-		
 		return arregloFijo;
 	}
 

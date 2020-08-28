@@ -24,7 +24,6 @@ public class Controller {
 	public Controller ()
 	{
 		view = new View();
-		catalogo = new MovieCatalog();
 	}
 
 	public void run() 
@@ -43,6 +42,7 @@ public class Controller {
 				view.printMessage("\n1.Arreglo Dinámico");
 				view.printMessage("2.Lista encadenada");
 				estructura = lector.nextInt();
+				catalogo = new MovieCatalog(estructura);
 				view.printMessage("--------- \nSe estan cargando los datos ");
 				catalogo.readDataArregloDinamico(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS, estructura);
 				view.printMessage("Catalogo creado");
