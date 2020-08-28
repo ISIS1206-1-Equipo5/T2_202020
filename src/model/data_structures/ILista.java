@@ -2,6 +2,7 @@ package model.data_structures;
 
 public interface ILista <T extends Comparable<T>> {
 	
+	
 	/**
 	 * Retornar el numero de elementos presentes en el arreglo
 	 * @return 
