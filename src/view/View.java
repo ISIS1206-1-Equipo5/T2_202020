@@ -45,8 +45,8 @@ public class View
 		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 
-	public void printMoviesInfo(ArregloDinamico<Movie> pMovies) {
-		
+	public void printMoviesInfo(ArregloDinamico<Movie> pMovies){
+			
 		System.out.println("Películas encontradas: " + pMovies.size());
 		
 		for(int i = 0; i < pMovies.size(); i++)

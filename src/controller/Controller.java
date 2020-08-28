@@ -44,7 +44,7 @@ public class Controller {
 				estructura = lector.nextInt();
 				catalogo = new MovieCatalog(estructura);
 				view.printMessage("--------- \nSe estan cargando los datos ");
-				catalogo.readDataArregloDinamico(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS, estructura);
+				catalogo.readData(PATH_INFO_PELICULAS, PATH_CASTING_PELICULAS, estructura);
 				view.printMessage("Catalogo creado");
 				//TODO Revisar el manejo de la excepci�n
 				try
@@ -56,7 +56,7 @@ public class Controller {
 				{
 					view.printMessage(e.getMessage());
 				}
-				view.printMessage("Se encontraron  " + catalogo.getMovieCount() + " peliculas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");						
+				view.printMessage("Se encontraron " + catalogo.getMovieCount() + " peliculas " + "\n----------------------------------------------------------------------------------------------------------------------------------------------------------");						
 				break;
 
 			case 2:
@@ -66,8 +66,10 @@ public class Controller {
 
 				String mensaje = name + " " + lastname;
 				try {
-
-					view.printMoviesInfo(catalogo.goodMoviesByDirectorName(mensaje));
+					if(catalogo != null)
+						view.printMoviesInfo(catalogo.goodMoviesByDirectorName(mensaje));
+					else
+						System.out.println("No se han cargado los datos." );
 					break;
 				} 
 				catch (Exception e) {
