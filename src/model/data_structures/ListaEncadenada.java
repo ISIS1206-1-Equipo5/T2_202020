@@ -1,17 +1,54 @@
 package model.data_structures;
 
-public class ListaEncadenada<T extends Comparable<T>> implements ILista<T> {
+import java.util.Iterator;
+
+public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>, Iterable<T>
+{
+	private Node first;
+	
+	private Node last;
+
+	
+	public class Node
+	{
+		T item;
+		Node next;
+	}
+
+
+	
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int tamaño = 0;
+		Iterator<T> iterator = iterator();
+		while(iterator.hasNext())
+		{
+			T item = iterator.next();
+			tamaño++;
+		}
+	
+		return tamaño;
 	}
 
 	@Override
 	public T getElement(int pos) {
-		// TODO Auto-generated method stub
-		return null;
+		T element = null;
+		int contador = 0;
+		Iterator<T> iterator = iterator();
+		while(iterator.hasNext()&& element!= null)
+		{
+			T item = iterator.next();
+			if(contador == (pos-1))
+			{
+				element = item;
+
+			}
+				
+			contador++;
+		}
+
+		return element;
 	}
 
 	@Override
@@ -22,20 +59,29 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T> {
 
 	@Override
 	public void addFirst(T element) {
-		// TODO Auto-generated method stub
+		
+		Node oldFirst = first;
+		first = new Node();
+		first.item = element;
+		first.next = oldFirst;
 		
 	}
+	
 
 	@Override
 	public void insertElement(T element, int pos) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 
 	@Override
 	public T removeFirst() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		T element = null;
+		T eliminado = first.item;
+		first = first.next;
+		
+		return eliminado;
 	}
 
 	@Override
@@ -46,14 +92,37 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T> {
 
 	@Override
 	public T deleteElement(int pos) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Iterator<T> iter = iterator();
+		int contador = 0;
+		Node prevoius = new Node();
+		Node sig = new Node();
+		boolean elimino = false;
+		while(iter.hasNext() && !elimino)
+		{
+			T item = iter.next();
+			if(contador == (pos-2))
+			{
+				prevoius.item = item;
+			}
+			else if(contador == pos)
+			{
+				sig.item= item;
+				prevoius.next = sig;
+				elimino = true;
+				
+			}
+			
+
+			contador++;
+				
+		}
+		return getElement(pos);
 	}
 
 	@Override
 	public T firstElement() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return first.item;
 	}
 
 	@Override
@@ -64,8 +133,8 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return first== null;
 	}
 
 	@Override
@@ -86,4 +155,29 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T> {
 		
 	}
 
+	@Override
+	public Iterator<T> iterator() {
+		return new ListIterator();
+	}
+	
+	private class ListIterator implements Iterator<T>{
+		
+		private Node current = first;
+	
+
+		@Override
+		public boolean hasNext() {
+			
+			return current!= null;
+		}
+
+		@Override
+		public T next() {
+			T item = current.item;
+			current = current.next;
+			return item;
+		}
+
+	
+	}
 }
