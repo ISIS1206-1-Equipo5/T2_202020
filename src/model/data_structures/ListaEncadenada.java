@@ -20,15 +20,15 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>, Iter
 
 	@Override
 	public int size() {
-		int tamaño = 0;
+		int tamano = 0;
 		Iterator<T> iterator = iterator();
 		while(iterator.hasNext())
 		{
 			T item = iterator.next();
-			tamaño++;
+			tamano++;
 		}
 	
-		return tamaño;
+		return tamano;
 	}
 
 	@Override
