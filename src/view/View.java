@@ -39,6 +39,7 @@ public class View
 		}
 		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 		System.out.println("ID: " + pMovie.getId() + "\n" +
+						   "Promedio de votación: " + pMovie.getVoteAverage() + "\n" +
 						   "Título: " + pMovie.getTitle() + "\n" + 
 						   "Géneros: " + pMovie.getGenres() + "\n" + 
 						   "Fecha de estreno : "+ pMovie.getReleaseDate() + "\n" + 
