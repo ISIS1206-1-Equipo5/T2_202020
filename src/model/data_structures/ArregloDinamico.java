@@ -77,7 +77,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements ILista<T> {
 	public void insertElement(T element, int pos) throws IndexOutOfBoundsException {
 		
 		if(tamanoAct+1 < pos || pos < 1)
-			throw new IndexOutOfBoundsException(pos-1);
+			throw new IndexOutOfBoundsException();
 		
 		tamanoAct++;
 		if ( tamanoAct == tamanoMax )
@@ -139,7 +139,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements ILista<T> {
 	public T deleteElement(int pos) throws IndexOutOfBoundsException {
 		
 		if(tamanoAct < pos || pos < 1)
-			throw new IndexOutOfBoundsException(pos-1);
+			throw new IndexOutOfBoundsException();
 		
 		T aEliminar = elementos[pos-1];
 
@@ -174,7 +174,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements ILista<T> {
 	public T getElement(int pos) throws IndexOutOfBoundsException{
 		
 		if(tamanoAct < pos || pos < 1)
-			throw new IndexOutOfBoundsException(pos-1);
+			throw new IndexOutOfBoundsException();
 		
 		return elementos[pos-1];
 	}
@@ -211,10 +211,10 @@ public class ArregloDinamico< T extends Comparable<T>> implements ILista<T> {
 	public void exchange(int pos1, int pos2) throws IndexOutOfBoundsException{
 		
 		if(tamanoAct < pos1 || pos1 < 1)
-			throw new IndexOutOfBoundsException(pos1-1);
+			throw new IndexOutOfBoundsException();
 		
 		if(tamanoAct < pos2 || pos2 < 1)
-			throw new IndexOutOfBoundsException(pos2-1);
+			throw new IndexOutOfBoundsException();
 		
 		T objeto1 = getElement(pos1);
 		T objeto2 = getElement(pos2);
@@ -228,7 +228,7 @@ public class ArregloDinamico< T extends Comparable<T>> implements ILista<T> {
 	public void changeInfo(int pos, T elem) throws IndexOutOfBoundsException{
 		
 		if(tamanoAct < pos || pos < 1)
-			throw new IndexOutOfBoundsException(pos-1);
+			throw new IndexOutOfBoundsException();
 		
 		elementos[pos-1] = elem;
 	}

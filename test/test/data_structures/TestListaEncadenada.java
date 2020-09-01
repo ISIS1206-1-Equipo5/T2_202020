@@ -1,31 +1,27 @@
 package test.data_structures;
 
-import model.data_structures.ArregloDinamico;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestArregloDinamico {
+import model.data_structures.ArregloDinamico;
+import model.data_structures.ListaEncadenada;
 
-	private ArregloDinamico<Double> arreglo;
-	private static int TAMANO=100;
+public class TestListaEncadenada {
+	private ListaEncadenada<Double> arreglo;
 
 	@Before
 	public void setUp1() {
-		arreglo= new ArregloDinamico<Double>(TAMANO);
-	}
-
-	public void setUp2() {
-		for(int i =0; i< TAMANO*2; i++){
-
-		}
+		arreglo= new ListaEncadenada<Double>();
 	}
 
 	public void setUp3() {
-		arreglo = new ArregloDinamico<Double>(TAMANO);
+		arreglo = new ListaEncadenada<Double>();
 		arreglo.insertElement(1.0, 1);
 		arreglo.insertElement(2.0, 2);
 		arreglo.insertElement(3.0, 3);
@@ -221,4 +217,6 @@ public class TestArregloDinamico {
 		assertEquals("No se intercambiaron los datos", Double.valueOf(15.0), arreglo.getElement(5));
 		assertEquals("No se intercambiaron los datos", Double.valueOf(18.0), arreglo.getElement(8));
 	}
+
+
 }

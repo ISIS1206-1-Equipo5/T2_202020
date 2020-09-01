@@ -28,9 +28,8 @@ public class MovieCatalog {
 	public MovieCatalog(int estructura) {
 		if(estructura == ARREGLO_DINAMICO)
 			movies = new ArregloDinamico<Movie>(1);
-		//TODO descomentar
-		//else if(estructura== LISTA_ENCADENADA) 
-		//moviesListaEncadenada = new ListaEncadenada<Movie>(0);
+		else if(estructura== LISTA_ENCADENADA) 
+			movies = new ListaEncadenada<Movie>();
 	}
 
 	//MÉTODOS
@@ -40,9 +39,9 @@ public class MovieCatalog {
 
 		if(pEstructura == ARREGLO_DINAMICO)
 			movies = new ArregloDinamico<Movie>(1);
-		//TODO descomentar
-		//else if(pEstructura== LISTA_ENCADENADA) 
-		//moviesListaEncadenada = new ListaEncadenada<Movie>(0);
+
+		else if(pEstructura== LISTA_ENCADENADA) 
+			movies = new ListaEncadenada<Movie>();
 
 		try {
 			CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
@@ -98,7 +97,10 @@ public class MovieCatalog {
 
 				Casting pCasting = new Casting(pIdC, actor1Name, actor1Gender, actor2Name, actor2Gender, actor3Name, actor3Gender, actor4Name, actor4Gender, actor5Name, actor5Gender, pActorNumber, directorName, directorGender, pDirectorNumber, pProducerName, pProducerNumber, screenplayName, editorName);
 				Movie m = new Movie(pIdM, pBudget, pGenres, pImdb, pOriginalLanguage, pOriginalTitle, pOverview, pPopularity, pProductionCompanies, pProductionCountries, pReleaseDate, pRevenue, pRuntime, pSpokenLanguages, pStatus, pTagline, pTitle, pVoteAverage, pVotecount, pProductionCompaniesNumber, pProductionCountriesNumber, pSpokenLanguagesNumber, pCasting);
-				movies.addLast(m);
+				if(pEstructura == ARREGLO_DINAMICO)
+					movies.addLast(m);
+				else if(pEstructura == LISTA_ENCADENADA)
+					movies.addFirst(m);
 			}
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
