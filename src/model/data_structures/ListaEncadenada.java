@@ -12,43 +12,17 @@ public class ListaEncadenada<T extends Comparable<T>> implements ILista<T>, Iter
 
 	private Node first;
 
-
-	private Node last;
-
-
 	private int tamanio;
 
-
-	public ListaEncadenada()
-
-	{
-
-		first = null;
-
-		tamanio = 0;
-
-	}
-
-
-
 	public class Node
-
 	{
 		T item;
-
 		Node next;
-
-
 		public Node()
-
 		{
-
 			this.item = null;
-
 			this.next = null;
-
 		}
-
 
 		public T getItem(){
 
