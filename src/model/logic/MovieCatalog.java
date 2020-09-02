@@ -186,9 +186,17 @@ public class MovieCatalog {
 		Movie[] worseMovies = new Movie[20];
 		ShellSort.shellSort(arreglo);
 		
-		for(int i=0; i<worseMovies.length; i++)
+		int i = 0;
+		int j = 0;
+		
+		while(i<worseMovies.length && j<arreglo.length)
 		{
-			worseMovies[i] = arreglo[i];
+			if(arreglo[j].getVoteCount() != 0)
+			{
+				worseMovies[i] = arreglo[j];
+				i++;
+			}			
+			j++;			
 		}
 		
 		return worseMovies;
