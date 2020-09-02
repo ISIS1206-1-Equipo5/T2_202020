@@ -126,7 +126,6 @@ public class TestListaEncadenada {
 		try {
 			arreglo.deleteElement(5);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			assertEquals("No se debería lanzar la excepción",true, true);
 		}
 		assertEquals("El elemento no debe existir en el arreglo", Double.valueOf(6.0), arreglo.getElement(5));
